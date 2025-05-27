@@ -11,18 +11,20 @@
         <el-col :lg="12">
           <el-form-item label="公告类型" prop="noticeType">
             <el-radio-group v-model="form.noticeType">
-              <el-radio v-for="dict in props.options.sys_notice_type" :key="dict.dictValue" :value="parseInt(dict.dictValue)">{{
-                dict.dictLabel
-              }}</el-radio>
+              <el-radio v-for="dict in props.options.sys_notice_type" :key="dict.dictValue"
+                :value="parseInt(dict.dictValue)">{{
+                  dict.dictLabel
+                }}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
         <el-col :lg="12">
           <el-form-item label="状态">
             <el-radio-group v-model="form.status">
-              <el-radio v-for="dict in props.options.sys_notice_status" :key="dict.dictValue" :value="parseInt(dict.dictValue)">{{
-                dict.dictLabel
-              }}</el-radio>
+              <el-radio v-for="dict in props.options.sys_notice_status" :key="dict.dictValue"
+                :value="parseInt(dict.dictValue)">{{
+                  dict.dictLabel
+                }}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
@@ -38,12 +40,15 @@
         </el-col>
         <el-col :lg="12">
           <el-form-item label="开始时间" prop="beginTime">
-            <el-date-picker v-model="form.beginTime" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+            <el-date-picker v-model="form.beginTime" type="datetime" placeholder="选择日期时间"
+              value-format="YYYY-MM-DD HH:mm:ss" format="YYYY-MM-DD HH:mm:ss"> </el-date-picker>
           </el-form-item>
         </el-col>
         <el-col :lg="12">
           <el-form-item label="结束时间" prop="endTime">
-            <el-date-picker v-model="form.endTime" :disabled-date="disabledDate" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+            <el-date-picker v-model="form.endTime" :disabled-date="disabledDate" type="datetime" placeholder="选择日期时间"
+              value-format="YYYY-MM-DD HH:mm:ss" format="YYYY-MM-DD HH:mm:ss">
+            </el-date-picker>
           </el-form-item>
         </el-col>
         <el-col :lg="24">
@@ -163,6 +168,7 @@ function submitForm() {
           emit('success')
         })
       } else {
+        console.log(form.value)
         addNotice(form.value).then(() => {
           proxy.$modal.msgSuccess('新增成功')
           open.value = false

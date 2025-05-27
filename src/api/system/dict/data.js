@@ -87,3 +87,12 @@ export function exportData(query) {
     params: query
   })
 }
+
+// 获取检验项目分类
+export function gettype(query) {
+  return request({
+    url: '/system/dict/data/gettype',
+    method: 'get',
+    params: query
+  })
+}

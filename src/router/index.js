@@ -90,6 +90,19 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user', titleKey: 'menu.personalCenter' }
       }
     ]
+  },
+  {
+    path: '/tool',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'gen/editTable',
+        component: () => import('@/views/tool/gen/editTable'),
+        name: 'GenEdit',
+        meta: { title: '修改生成配置', activeMenu: '/tool/gen' }
+      }
+    ]
   }
 ]
 

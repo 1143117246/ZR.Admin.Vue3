@@ -236,7 +236,7 @@ function handleEditTable(row) {
   getList()
 
   router.push({
-    path: '/gen/editTable',
+    path: '/tool/gen/editTable',
     query: { tableId: row.tableId }
   })
 }

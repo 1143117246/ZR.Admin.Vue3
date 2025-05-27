@@ -3,7 +3,9 @@
     <el-popover placement="bottom" trigger="click" width="400px" popper-class="el-popover-pupop-user-news">
       <template #reference>
         <el-badge :show-zero="false" :value="allDotNum" style="line-height: 18px">
-          <el-icon><bell /></el-icon>
+          <el-icon>
+            <bell />
+          </el-icon>
         </el-badge>
       </template>
 
@@ -33,7 +35,7 @@
           </div>
           <div class="foot-box">
             <div class="read" @click="onAllReadClick" v-show="dotNumInfo.noticeNum > 0">标记当前页已读</div>
-            <div class="goNotice" @click="handleToNotice" v-if="settings.noticeUrl">前往通知中心</div>
+            <!-- <div class="goNotice" @click="handleToNotice" v-if="settings.noticeUrl">前往通知中心</div> -->
           </div>
         </el-tab-pane>
 
@@ -199,6 +201,7 @@ init()
       justify-content: center;
       background: linear-gradient(23deg, rgba(110, 227, 225, 0.18) 0%, #00d9f5 100%);
     }
+
     &:hover {
       color: var(--el-color-primary);
     }
@@ -221,6 +224,7 @@ init()
     }
   }
 }
+
 .foot-box {
   color: var(--el-color-primary);
   font-size: 13px;
@@ -238,6 +242,7 @@ init()
     font-size: 12px;
     float: left;
   }
+
   .goNotice {
     float: right;
   }

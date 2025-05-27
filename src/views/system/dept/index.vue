@@ -6,7 +6,8 @@
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="部门状态">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -17,21 +18,18 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button plain type="primary" icon="plus" @click="handleAdd" v-hasPermi="['system:dept:add']">{{ $t('btn.add') }}</el-button>
+        <el-button plain type="primary" icon="plus" @click="handleAdd" v-hasPermi="['system:dept:add']">{{ $t('btn.add')
+        }}</el-button>
       </el-col>
 
       <el-col :span="1.5">
-        <el-button type="info" plain icon="sort" @click="toggleExpandAll">{{ $t('btn.expand') }}/{{ $t('btn.collapse') }}</el-button>
+        <el-button type="info" plain icon="sort" @click="toggleExpandAll">{{ $t('btn.expand') }}/{{ $t('btn.collapse')
+        }}</el-button>
       </el-col>
       <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
-    <el-table
-      v-if="refreshTable"
-      v-loading="loading"
-      :data="deptList"
-      row-key="deptId"
-      :default-expand-all="isExpandAll"
+    <el-table v-if="refreshTable" v-loading="loading" :data="deptList" row-key="deptId" :default-expand-all="isExpandAll"
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
       <el-table-column prop="deptName" label="部门名称" width="240"></el-table-column>
       <el-table-column prop="deptId" label="部门id"></el-table-column>
@@ -58,12 +56,7 @@
           <el-button text size="small" icon="plus" @click="handleAdd(scope.row)" v-hasPermi="['system:dept:add']">
             {{ $t('btn.add') }}
           </el-button>
-          <el-button
-            text
-            size="small"
-            v-if="scope.row.parentId != 0"
-            icon="delete"
-            @click="handleDelete(scope.row)"
+          <el-button text size="small" v-if="scope.row.parentId != 0" icon="delete" @click="handleDelete(scope.row)"
             v-hasPermi="['system:dept:remove']">
             {{ $t('btn.delete') }}
           </el-button>
@@ -77,21 +70,9 @@
         <el-row :gutter="20">
           <el-col :lg="24" v-if="form.parentId !== 0">
             <el-form-item label="上级部门" prop="parentId">
-              <!-- <el-tree-select
-                v-model="form.parentId"
-                :data="deptOptions"
-                :props="{ value: 'deptId', label: 'deptName', children: 'children' }"
-                value-key="deptId"
-                placeholder="选择上级部门"
-                check-strictly
-                :render-after-expand="false" /> -->
-              <el-cascader
-                class="w100"
-                :options="deptOptions"
+              <el-cascader class="w100" :options="deptOptions"
                 :props="{ checkStrictly: true, value: 'deptId', label: 'deptName', emitPath: false }"
-                placeholder="请选择上级菜单"
-                clearable
-                v-model="form.parentId">
+                placeholder="请选择上级菜单" clearable v-model="form.parentId">
                 <template #default="{ node, data }">
                   <span>{{ data.deptName }}</span>
                   <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
@@ -127,7 +108,8 @@
           <el-col :lg="12">
             <el-form-item label="部门状态">
               <el-radio-group v-model="form.status">
-                <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :value="parseInt(dict.dictValue)">{{ dict.dictLabel }}</el-radio>
+                <el-radio v-for="dict in statusOptions" :key="dict.dictValue" :value="parseInt(dict.dictValue)">{{
+                  dict.dictLabel }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>

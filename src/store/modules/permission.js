@@ -96,7 +96,7 @@ function filterAsyncRouter(asyncRouterMap, lastRouter = false, type = false) {
 
 function filterChildren(childrenMap, lastRouter = false) {
   var children = []
-  childrenMap.forEach(el => {
+  childrenMap.forEach((el) => {
     el.path = lastRouter ? lastRouter.path + '/' + el.path : el.path
     if (el.children && el.children.length && el.component === 'ParentView') {
       children = children.concat(filterChildren(el.children, el))
@@ -107,15 +107,17 @@ function filterChildren(childrenMap, lastRouter = false) {
   return children
 }
 
-export const loadView = (view) => {
-  let res
-  for (const path in modules) {
-    const dir = path.split('views/')[1].split('.vue')[0]
-    if (dir === view) {
-      res = () => modules[path]()
-    }
+export const loadView = (viewPath) => {
+  const view = `../../views/${viewPath}.vue`
+
+  if (modules[view]) {
+    return modules[view]
   }
-  return res
+
+  // 返回404组件
+  var path = import.meta.glob('../../views/error/404.vue')['../../views/error/404.vue']
+  console.error(`404组件${view}`)
+  return path
 }
 
 export default usePermissionStore
