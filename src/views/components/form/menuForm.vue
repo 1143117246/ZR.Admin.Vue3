@@ -4,13 +4,9 @@
       <el-row>
         <el-col :lg="24">
           <el-form-item :label="$t('m.parentMenu')">
-            <el-cascader
-              class="w100"
-              :options="menuOptions"
+            <el-cascader class="w100" :options="menuOptions"
               :props="{ checkStrictly: true, value: 'menuId', label: 'menuName', emitPath: false }"
-              placeholder="请选择上级菜单"
-              clearable
-              v-model="form.parentId">
+              placeholder="请选择上级菜单" clearable v-model="form.parentId">
               <template #default="{ node, data }">
                 <span>{{ data.menuName }}</span>
                 <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
@@ -99,7 +95,7 @@
             </template>
             <el-input v-model="form.component" placeholder="请输入组件路径">
               <template #prepend>
-                <span style="width: 40px">src/views/</span>
+                <span style="width: 40px;">src/views/</span>
               </template>
             </el-input>
           </el-form-item>
@@ -109,7 +105,8 @@
             <el-input v-model="form.perms" placeholder="请输入权限标识" maxlength="100" />
             <template #label>
               <span>
-                <el-tooltip content="控制器中定义的权限字符，如：[ActionPermissionFilter(Permission = 'system:user:delete')])" placement="top">
+                <el-tooltip content="控制器中定义的权限字符，如：[ActionPermissionFilter(Permission = 'system:user:delete')])"
+                  placement="top">
                   <el-icon :size="15">
                     <questionFilled />
                   </el-icon>
@@ -185,7 +182,9 @@
               </span>
             </template>
             <el-radio-group v-model="form.visible">
-              <el-radio v-for="dict in options.sys_show_hide" :key="dict.dictValue" :value="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+              <el-radio v-for="dict in options.sys_show_hide" :key="dict.dictValue" :value="dict.dictValue">{{
+                dict.dictLabel
+                }}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>
@@ -202,7 +201,8 @@
               </span>
             </template>
             <el-radio-group v-model="form.status">
-              <el-radio v-for="dict in options.sys_normal_disable" :key="dict.dictValue" :value="dict.dictValue">{{ dict.dictLabel }}</el-radio>
+              <el-radio v-for="dict in options.sys_normal_disable" :key="dict.dictValue" :value="dict.dictValue">{{
+                dict.dictLabel }}</el-radio>
             </el-radio-group>
           </el-form-item>
         </el-col>

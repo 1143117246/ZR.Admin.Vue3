@@ -11,12 +11,12 @@
       <header-search class="right-menu-item" />
       <Notice title="通知" class="right-menu-item" />
       <template v-if="appStore.device == 'desktop'">
-        <zr-git title="源码地址" class="right-menu-item" />
-        <zr-doc title="文档地址" class="right-menu-item" />
-        <screenfull title="全屏" class="right-menu-item" />
+        <!-- <zr-git title="源码地址" class="right-menu-item" />
+        <zr-doc title="文档地址" class="right-menu-item" /> -->
+        <!-- <screenfull title="全屏" class="right-menu-item" /> -->
       </template>
-      <size-select title="布局大小" class="right-menu-item" />
-      <LangSelect title="语言设置" class="right-menu-item" />
+      <!-- <size-select title="布局大小" class="right-menu-item" /> -->
+      <!-- <LangSelect title="语言设置" class="right-menu-item" /> -->
 
       <div class="right-menu-item">
         <el-dropdown @command="handleCommand" trigger="click" style="vertical-align: middle">
@@ -46,9 +46,9 @@
           </template>
         </el-dropdown>
       </div>
-      <div class="right-menu-item mr10" @click="handleCommand('setLayout')">
+      <!-- <div class="right-menu-item mr10" @click="handleCommand('setLayout')">
         <el-icon><Setting /></el-icon>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

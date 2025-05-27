@@ -1,7 +1,7 @@
 {
   "name": "zr.admin",
   "version": "v20240105",
-  "description": "ZRAdmin.NET管理系统",
+  "description": "艾希生产质检管理系统",
   "author": "ZR",
   "license": "MIT",
   "type": "module",
@@ -12,8 +12,8 @@
     "preview": "vite preview"
   },
   "repository": {
-    "type": "git",
-    "url": "https://gitee.com/izory/ZrAdminNetCore"
+    "type": "",
+    "url": ""
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",

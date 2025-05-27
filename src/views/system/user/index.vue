@@ -4,18 +4,12 @@
       <!--部门数据-->
       <el-col :span="4" :xs="24">
         <div class="head-container">
-          <el-input v-model="deptName" placeholder="请输入部门名称" clearable prefix-icon="search" style="margin-bottom: 20px" />
+          <el-input v-model="deptName" placeholder="请输入部门名称" clearable prefix-icon="search"
+            style="margin-bottom: 20px" />
         </div>
         <div class="head-container">
-          <el-tree
-            :data="deptOptions"
-            :props="{ label: 'label', children: 'children' }"
-            :expand-on-click-node="false"
-            :filter-node-method="filterNode"
-            ref="deptTreeRef"
-            node-key="id"
-            highlight-current
-            default-expand-all
+          <el-tree :data="deptOptions" :props="{ label: 'label', children: 'children' }" :expand-on-click-node="false"
+            :filter-node-method="filterNode" ref="deptTreeRef" node-key="id" highlight-current default-expand-all
             @node-click="handleNodeClick">
             <template #default="{ node, data }">
               <span class="custom-tree-node">
@@ -32,25 +26,23 @@
       <el-col :lg="20" :xm="24">
         <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
           <el-form-item label="用户名称" prop="userName">
-            <el-input v-model="queryParams.userName" placeholder="请输入用户名称" clearable style="width: 240px" @keyup.enter="handleQuery" />
+            <el-input v-model="queryParams.userName" placeholder="请输入用户名称" clearable style="width: 240px"
+              @keyup.enter="handleQuery" />
           </el-form-item>
           <el-form-item label="手机号码" prop="phonenumber">
-            <el-input v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 240px" @keyup.enter="handleQuery" />
+            <el-input v-model="queryParams.phonenumber" placeholder="请输入手机号码" clearable style="width: 240px"
+              @keyup.enter="handleQuery" />
           </el-form-item>
           <el-form-item label="状态" prop="status">
             <el-select v-model="queryParams.status" placeholder="用户状态" clearable style="width: 240px">
               <el-option label="全部" :value="-1" />
-              <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+              <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+                :value="dict.dictValue" />
             </el-select>
           </el-form-item>
           <el-form-item label="创建时间">
-            <el-date-picker
-              v-model="dateRange"
-              style="width: 240px"
-              type="daterange"
-              range-separator="-"
-              start-placeholder="开始日期"
-              end-placeholder="结束日期"></el-date-picker>
+            <el-date-picker v-model="dateRange" style="width: 240px" type="daterange" range-separator="-"
+              start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" icon="search" @click="handleQuery">{{ $t('btn.search') }}</el-button>
@@ -65,12 +57,14 @@
             </el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate" v-hasPermi="['system:user:edit']">
+            <el-button type="success" plain icon="Edit" :disabled="single" @click="handleUpdate"
+              v-hasPermi="['system:user:edit']">
               {{ $t('btn.edit') }}
             </el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete" v-hasPermi="['system:user:remove']">
+            <el-button type="danger" plain icon="Delete" :disabled="multiple" @click="handleDelete"
+              v-hasPermi="['system:user:remove']">
               {{ $t('btn.delete') }}
             </el-button>
           </el-col>
@@ -91,47 +85,22 @@
         <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" :selectable="checkSelectable" />
           <el-table-column label="用户编号" align="center" key="userId" prop="userId" v-if="columns.showColumn('userId')" />
-          <el-table-column
-            label="登录名"
-            align="center"
-            key="userName"
-            prop="userName"
-            v-if="columns.showColumn('userName')"
-            :show-overflow-tooltip="true" />
-          <el-table-column
-            label="用户昵称"
-            align="center"
-            key="nickName"
-            prop="nickName"
-            v-if="columns.showColumn('nickName')"
-            :show-overflow-tooltip="true" />
-          <el-table-column
-            label="部门"
-            align="center"
-            key="deptName"
-            prop="deptName"
-            v-if="columns.showColumn('deptName')"
-            :show-overflow-tooltip="true" />
-          <el-table-column
-            label="手机号码"
-            align="center"
-            key="phonenumber"
-            prop="phonenumber"
-            v-if="columns.showColumn('phonenumber')"
-            width="120" />
+          <el-table-column label="登录名" align="center" key="userName" prop="userName"
+            v-if="columns.showColumn('userName')" :show-overflow-tooltip="true" />
+          <el-table-column label="用户昵称" align="center" key="nickName" prop="nickName"
+            v-if="columns.showColumn('nickName')" :show-overflow-tooltip="true" />
+          <el-table-column label="部门" align="center" key="deptName" prop="deptName"
+            v-if="columns.showColumn('deptName')" :show-overflow-tooltip="true" />
+          <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber"
+            v-if="columns.showColumn('phonenumber')" width="120" />
           <el-table-column label="启用" align="center" key="status" v-if="columns.showColumn('status')">
             <template #default="scope">
-              <el-switch
-                v-model="scope.row.status"
-                :active-value="0"
-                :inactive-value="1"
-                active-text="是"
-                inactive-text="否"
-                inline-prompt
-                @change="handleStatusChange(scope.row)"></el-switch>
+              <el-switch v-model="scope.row.status" :active-value="0" :inactive-value="1" active-text="是"
+                inactive-text="否" inline-prompt @change="handleStatusChange(scope.row)"></el-switch>
             </template>
           </el-table-column>
-          <el-table-column label="创建时间" align="center" prop="createTime" v-if="columns.showColumn('createTime')" width="160"></el-table-column>
+          <el-table-column label="创建时间" align="center" prop="createTime" v-if="columns.showColumn('createTime')"
+            width="160"></el-table-column>
           <el-table-column prop="sex" label="性别" align="center" v-if="columns.showColumn('sex')">
             <template #default="scope">
               <dict-tag :options="sexOptions" :value="scope.row.sex" />
@@ -144,23 +113,25 @@
           </el-table-column>
           <el-table-column prop="email" label="用户邮箱" align="center" v-if="columns.showColumn('email')" />
           <el-table-column prop="loginDate" label="最后登录时间" align="center" v-if="columns.showColumn('loginDate')" />
-          <el-table-column label="操作" align="left" width="110" class-name="small-padding fixed-width">
+          <el-table-column label="操作" align="left" width="200" class-name="small-padding fixed-width">
             <template #default="scope">
-              <el-button text icon="Edit" v-if="scope.row.userId !== 1" @click="handleUpdate(scope.row)" v-hasPermi="['system:user:edit']">
-              </el-button>
-              <el-button v-if="!scope.row.isAdmin" text icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['system:user:remove']">
-              </el-button>
-              <el-button
-                v-if="scope.row.userId !== 1"
-                text
-                icon="Key"
-                title="重置密码"
-                @click="handleResetPwd(scope.row)"
-                v-hasPermi="['system:user:resetPwd']"></el-button>
+              <el-button-group>
+                <el-button size="small" text icon="Edit" v-if="scope.row.userId !== 1" @click="handleUpdate(scope.row)"
+                  v-hasPermi="['system:user:edit']">
+                  {{ $t('btn.edit') }}
+                </el-button>
+                <el-button size="small" v-if="!scope.row.isAdmin" text icon="Delete" @click="handleDelete(scope.row)"
+                  v-hasPermi="['system:user:remove']">
+                  {{ $t('btn.delete') }}
+                </el-button>
+                <el-button size="small" v-if="scope.row.userId !== 1" text icon="Key" title="重置密码"
+                  @click="handleResetPwd(scope.row)" v-hasPermi="['system:user:resetPwd']">重置密码</el-button>
+              </el-button-group>
             </template>
           </el-table-column>
         </el-table>
-        <pagination :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize" @pagination="getList" />
+        <pagination :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+          @pagination="getList" />
       </el-col>
     </el-row>
 
@@ -185,14 +156,9 @@
           </el-col>
           <el-col :lg="12">
             <el-form-item label="归属部门" prop="deptId">
-              <el-tree-select
-                v-model="form.deptId"
-                :data="deptOptions"
-                :props="{ value: 'id', label: 'label', children: 'children' }"
-                value-key="id"
-                placeholder="请选择归属部门"
-                check-strictly
-                :render-after-expand="false" />
+              <el-tree-select v-model="form.deptId" :data="deptOptions"
+                :props="{ value: 'id', label: 'label', children: 'children' }" value-key="id" placeholder="请选择归属部门"
+                check-strictly :render-after-expand="false" />
             </el-form-item>
           </el-col>
           <el-col :lg="12">
@@ -217,28 +183,27 @@
           <el-col :lg="12">
             <el-form-item label="用户状态">
               <el-radio-group v-model="form.status">
-                <el-radio-button v-for="dict in statusOptions" :key="dict.dictValue" :value="parseInt(dict.dictValue)">{{
-                  dict.dictLabel
-                }}</el-radio-button>
+                <el-radio-button v-for="dict in statusOptions" :key="dict.dictValue"
+                  :value="parseInt(dict.dictValue)">{{
+                    dict.dictLabel
+                  }}</el-radio-button>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :lg="24">
             <el-form-item label="岗位">
               <el-select v-model="form.postIds" multiple placeholder="请选择岗位" style="width: 100%">
-                <el-option v-for="item in postOptions" :key="item.postId" :label="item.postName" :value="item.postId" :disabled="item.status == 1">
+                <el-option v-for="item in postOptions" :key="item.postId" :label="item.postName" :value="item.postId"
+                  :disabled="item.status == 1">
                 </el-option>
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :lg="24">
             <el-form-item label="角色">
-              <el-select v-model="form.roleIds" multiple placeholder="请选择角色" style="width: 100%" @change="selectRole($event)">
-                <el-option
-                  v-for="item in roleOptions"
-                  :key="item.roleId"
-                  :label="item.roleName"
-                  :value="item.roleId"
+              <el-select v-model="form.roleIds" multiple placeholder="请选择角色" style="width: 100%"
+                @change="selectRole($event)">
+                <el-option v-for="item in roleOptions" :key="item.roleId" :label="item.roleName" :value="item.roleId"
                   :disabled="item.status == 1 || form.userId == 1">
                   <span style="float: left">{{ item.roleName }}</span>
                   <span style="float: right">{{ item.roleKey }}</span>
@@ -261,18 +226,9 @@
 
     <!-- 用户导入对话框 -->
     <el-dialog :title="upload.title" v-model="upload.open" width="400px" append-to-body>
-      <el-upload
-        name="file"
-        ref="uploadRef"
-        :limit="1"
-        accept=".xlsx,.xls"
-        :headers="upload.headers"
-        :action="upload.url + '?updateSupport=' + upload.updateSupport"
-        :disabled="upload.isUploading"
-        :on-progress="handleFileUploadProgress"
-        :on-success="handleFileSuccess"
-        :auto-upload="false"
-        drag>
+      <el-upload name="file" ref="uploadRef" :limit="1" accept=".xlsx,.xls" :headers="upload.headers"
+        :action="upload.url + '?updateSupport=' + upload.updateSupport" :disabled="upload.isUploading"
+        :on-progress="handleFileUploadProgress" :on-success="handleFileSuccess" :auto-upload="false" drag>
         <el-icon class="el-icon--upload">
           <upload-filled />
         </el-icon>
@@ -283,7 +239,8 @@
               <el-checkbox v-model="upload.updateSupport" /> 是否更新已经存在的用户数据
             </div> -->
             <span>仅允许导入xls、xlsx格式文件。</span>
-            <el-link type="primary" :underline="false" style="font-size: 12px; vertical-align: baseline" @click="importTemplate">下载模板</el-link>
+            <el-link type="primary" :underline="false" style="font-size: 12px; vertical-align: baseline"
+              @click="importTemplate">下载模板</el-link>
           </div>
         </template>
       </el-upload>
@@ -463,7 +420,7 @@ function handleDelete(row) {
       getList()
       proxy.$modal.msgSuccess('删除成功')
     })
-    .catch(() => {})
+    .catch(() => { })
 }
 /** 导出按钮操作 */
 function handleExport() {
@@ -507,7 +464,7 @@ function handleResetPwd(row) {
         proxy.$modal.msgSuccess('修改成功，新密码是：' + value)
       })
     })
-    .catch(() => {})
+    .catch(() => { })
 }
 /** 选择条数  */
 function handleSelectionChange(selection) {

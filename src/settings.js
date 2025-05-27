@@ -2,7 +2,7 @@ export default {
   /**
    * 框架版本号
    */
-  version: '20240105',
+  version: '20250306',
   /**
    * 网页标题
    */
@@ -55,7 +55,7 @@ export default {
   /**
    * 版权信息
    */
-  copyright: 'Copyright ©2024 <a target="_black" href="http://www.izhaorui.cn">ZRAdmin.NET</a> All Rights Reserved.',
+  copyright: 'Copyright ©2025 <a target="_black" href="">艾希生产质检管理系统</a> All Rights Reserved.',
   /**
    * 是否显示底部栏
    */
@@ -67,7 +67,7 @@ export default {
   /**
    * 水印文案
    */
-  watermarkText: 'ZRAdmin.NET',
+  watermarkText: 'Acexe',
   /**
    * 是否显示其他登录
    */
@@ -107,5 +107,5 @@ export default {
   /**
    * 前往通知地址
    */
-  noticeUrl: 'https://gitee.com/izory/ZrAdminNetCore'
+  noticeUrl: ''
 }

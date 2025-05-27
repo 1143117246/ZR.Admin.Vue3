@@ -4,14 +4,14 @@
     <div class="login">
       <h3 class="title">{{ defaultSettings.title }}</h3>
 
-      <LangSelect title="多语言设置" class="langSet" />
+      <!-- <LangSelect title="多语言设置" class="langSet" /> -->
 
       <div style="padding: 0 25px 5px 25px">
-        <el-tabs v-model="loginType" @tab-click="handleLoginType">
+        <!-- <el-tabs v-model="loginType" @tab-click="handleLoginType">
           <el-tab-pane :label="$t('login.loginway1')" :name="1"></el-tab-pane>
           <el-tab-pane :label="$t('login.loginway2')" :name="2" v-if="defaultSettings.showPhoneLogin"></el-tab-pane>
           <el-tab-pane :label="$t('login.loginway3')" :name="3" v-if="defaultSettings.showQrLogin"></el-tab-pane>
-        </el-tabs>
+        </el-tabs> -->
       </div>
 
       <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form" v-if="loginType == 1">
@@ -23,20 +23,16 @@
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input
-            v-model="loginForm.password"
-            show-password
-            type="password"
-            auto-complete="off"
-            :placeholder="$t('login.password')"
-            @keyup.enter="handleLogin">
+          <el-input v-model="loginForm.password" show-password type="password" auto-complete="off"
+            :placeholder="$t('login.password')" @keyup.enter="handleLogin">
             <template #prefix>
               <svg-icon name="password" class="input-icon" />
             </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="code" v-if="captchaOnOff != 'off'">
-          <el-input v-model="loginForm.code" auto-complete="off" :placeholder="$t('login.captcha')" style="width: 63%" @keyup.enter="handleLogin">
+          <el-input v-model="loginForm.code" auto-complete="off" :placeholder="$t('login.captcha')" style="width: 63%"
+            @keyup.enter="handleLogin">
             <template #prefix>
               <svg-icon name="validCode" class="input-icon" />
             </template>
@@ -47,7 +43,8 @@
         </el-form-item>
 
         <el-form-item style="width: 100%" :style="{ 'margin-top': captchaOnOff == 'off' ? '40px' : '' }">
-          <el-button :loading="loading" size="default" round type="primary" style="width: 100%" @click.prevent="handleLogin">
+          <el-button :loading="loading" size="default" round type="primary" style="width: 100%"
+            @click.prevent="handleLogin">
             <span v-if="!loading">{{ $t('login.btnLogin') }}</span>
             <span v-else>登 录 中...</span>
           </el-button>
@@ -55,10 +52,10 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center">
           <el-checkbox v-model="loginForm.rememberMe">{{ $t('login.rememberMe') }}</el-checkbox>
-          <span style="font-size: 12px">
+          <!-- <span style="font-size: 12px">
             <router-link class="link-type" :to="'/register'">{{ $t('login.register') }}</router-link>
             <span @click="handleForgetPwd()" class="forget-pwd">{{ $t('login.forgotPwd') }}</span>
-          </span>
+          </span> -->
         </div>
       </el-form>
 
@@ -229,6 +226,7 @@ getCookie()
 
 <style lang="scss" scoped>
 @use '@/assets/styles/login.scss';
+
 .forget-pwd {
   color: #ccc;
   margin-left: 10px;
@@ -236,6 +234,7 @@ getCookie()
   border-left: 1px solid;
   padding-left: 10px;
 }
+
 .qrCode {
   width: 160px;
   height: 160px;

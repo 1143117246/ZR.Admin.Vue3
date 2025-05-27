@@ -3,16 +3,19 @@
     <el-form :model="queryParams" inline @submit.prevent ref="queryRef" v-show="searchToggle">
       <el-form-item prop="taskType">
         <el-select clearable v-model="queryParams.taskType" placeholder="请选择任务类型">
-          <el-option v-for="item in options.taskTypeOptions" :key="item.dictValue" :label="item.dictLabel" :value="parseInt(item.dictValue)" />
+          <el-option v-for="item in options.sys_job_type" :key="item.dictValue" :label="item.dictLabel"
+            :value="parseInt(item.dictValue)" />
         </el-select>
       </el-form-item>
       <el-form-item prop="queryText">
-        <el-input v-model="queryParams.queryText" placeholder="请输入计划任务名称" clearable @keyup.enter="handleQuery" @clear="handleQuery" />
+        <el-input v-model="queryParams.queryText" placeholder="请输入计划任务名称" clearable @keyup.enter="handleQuery"
+          @clear="handleQuery" />
       </el-form-item>
       <el-form-item prop="isStart">
         <el-radio-group v-model="queryParams.isStart" @change="handleQuery()">
           <el-radio-button value="">全部</el-radio-button>
-          <el-radio-button :value="item.dictValue" v-for="item in options.isStartOptions">{{ item.dictLabel }}</el-radio-button>
+          <el-radio-button :value="item.dictValue" v-for="item in options.isStartOptions">{{ item.dictLabel
+            }}</el-radio-button>
         </el-radio-group>
       </el-form-item>
       <el-form-item prop="viewSwitch">
@@ -45,13 +48,15 @@
       </el-col>
       <right-toolbar :showSearch="searchToggle" :columns="columns" @queryTable="handleQuery"></right-toolbar>
     </el-row>
-    <el-table v-if="viewSwitch == 1" ref="tasks" v-loading="loading" :data="dataTasks" border row-key="id" @sort-change="handleSortable">
+    <el-table v-if="viewSwitch == 1" ref="tasks" v-loading="loading" :data="dataTasks" row-key="id"
+      @sort-change="handleSortable">
       <!-- <el-table-column type="index" :index="handleIndexCalc" label="#" align="center" /> -->
-      <el-table-column prop="id" label="id" align="center" :show-overflow-tooltip="true" v-if="columns.showColumn('id')" />
-      <el-table-column prop="name" label="任务名称" width="100" />
+      <el-table-column prop="id" label="id" align="center" :show-overflow-tooltip="true"
+        v-if="columns.showColumn('id')" />
+      <el-table-column prop="name" label="任务名称" width="120" />
       <el-table-column prop="taskType" label="任务类型" align="center" v-if="columns.showColumn('taskType')">
         <template #default="scope">
-          <dict-tag :options="options.taskTypeOptions" :value="scope.row.taskType" />
+          <dict-tag :options="options.sys_job_type" :value="scope.row.taskType" />
         </template>
       </el-table-column>
       <el-table-column prop="triggerType" label="触发器类型" align="center" v-if="columns.showColumn('triggerType')">
@@ -64,38 +69,38 @@
           <dict-tag :value="scope.row.isStart" :options="options.isStartOptions"></dict-tag>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="jobGroup"
-        :show-overflow-tooltip="true"
-        align="center"
-        label="任务分组"
-        width="80"
-        v-if="columns.showColumn('jobGroup')" />
-      <el-table-column prop="assemblyName" label="程序集名称" v-if="columns.showColumn('assemblyName')" :show-overflow-tooltip="true" />
+      <el-table-column prop="jobGroup" label="任务分组" align="center" v-if="columns.showColumn('jobGroup')">
+        <template #default="scope">
+          <dict-tag :options="options.jobGroupOptions" :value="scope.row.jobGroup" />
+        </template>
+      </el-table-column>
+      <el-table-column prop="assemblyName" label="程序集名称" v-if="columns.showColumn('assemblyName')"
+        :show-overflow-tooltip="true" />
       <el-table-column prop="className" label="任务类名" v-if="columns.showColumn('className')" />
       <el-table-column prop="runTimes" align="center" label="运行次数" width="80" />
-      <el-table-column prop="intervalSecond" align="center" label="执行间隔(s)" v-if="columns.showColumn('intervalSecond')" width="90" />
-      <el-table-column prop="cron" align="center" label="运行表达式" v-if="columns.showColumn('cron')" :show-overflow-tooltip="true" />
-      <el-table-column prop="remark" align="center" label="备注" v-if="columns.showColumn('remark')" :show-overflow-tooltip="true" />
-      <el-table-column prop="jobParams" label="任务参数" align="center" :show-overflow-tooltip="true" v-if="columns.showColumn('jobParams')" />
-      <el-table-column
-        prop="lastRunTime"
-        label="最后运行时间"
-        align="center"
-        :show-overflow-tooltip="true"
+      <el-table-column prop="intervalSecond" align="center" label="执行间隔(s)" v-if="columns.showColumn('intervalSecond')"
+        width="90" />
+      <el-table-column prop="cron" align="center" label="运行表达式" v-if="columns.showColumn('cron')"
+        :show-overflow-tooltip="true" />
+      <el-table-column prop="remark" align="center" label="备注" v-if="columns.showColumn('remark')"
+        :show-overflow-tooltip="true" />
+      <el-table-column prop="jobParams" label="任务参数" align="center" :show-overflow-tooltip="true"
+        v-if="columns.showColumn('jobParams')" />
+      <el-table-column prop="lastRunTime" label="最后运行时间" align="center" :show-overflow-tooltip="true"
         v-if="columns.showColumn('lastRunTime')" />
       <el-table-column prop="apiUrl" label="网络请求地址" v-if="columns.showColumn('apiUrl')" />
-      <el-table-column label="操作" width="190" align="center">
+
+      <el-table-column label="操作" width="230" align="center">
         <template #default="scope">
-          <el-button text icon="view" v-hasPermi="['monitor:job:query']" @click="handleDetails(scope.row)">
+          <el-button size="small" text icon="view" v-hasPermi="['monitor:job:query']" @click="handleDetails(scope.row)">
             {{ $t('btn.details') }}
           </el-button>
-          <el-button text icon="view" v-hasPermi="['monitor:job:query']" @click="handleJobLog(scope.row)">
+          <el-button size="small" text icon="view" v-hasPermi="['monitor:job:query']" @click="handleJobLog(scope.row)">
             {{ $t('btn.log') }}
           </el-button>
 
           <el-dropdown @command="handleCommand($event, scope.row)">
-            <el-button text class="ml5">
+            <el-button size="small" text class="ml5">
               {{ $t('btn.more') }}
               <el-icon class="el-icon--right">
                 <arrow-down />
@@ -106,33 +111,33 @@
               <el-dropdown-menu>
                 <div v-hasPermi="['monitor:job:run']" v-if="scope.row.isStart">
                   <el-dropdown-item command="run">
-                    <el-button icon="remove" title="运行一次"> {{ $t('btn.run') }}一次 </el-button>
+                    <el-button size="small" icon="remove" title="运行一次"> {{ $t('btn.run') }}一次 </el-button>
                   </el-dropdown-item>
                 </div>
                 <div v-if="scope.row.isStart" v-hasPermi="['monitor:job:stop']">
                   <el-dropdown-item command="stop">
-                    <el-button type="danger" icon="video-pause" title="停止">
+                    <el-button size="small" type="danger" icon="video-pause" title="停止">
                       {{ $t('btn.stop') }}
                     </el-button>
                   </el-dropdown-item>
                 </div>
                 <div v-if="!scope.row.isStart" v-hasPermi="['monitor:job:start']">
                   <el-dropdown-item command="start">
-                    <el-button icon="video-play" title="启动">
+                    <el-button size="small" icon="video-play" title="启动">
                       {{ $t('btn.start') }}
                     </el-button>
                   </el-dropdown-item>
                 </div>
                 <div v-if="!scope.row.isStart" v-hasPermi="['monitor:job:edit']">
                   <el-dropdown-item command="update">
-                    <el-button icon="edit" title="编辑">
+                    <el-button size="small" icon="edit" title="编辑">
                       {{ $t('btn.edit') }}
                     </el-button>
                   </el-dropdown-item>
                 </div>
                 <div v-if="!scope.row.isStart" v-hasPermi="['monitor:job:delete']">
                   <el-dropdown-item command="delete">
-                    <el-button icon="delete" title="删除">
+                    <el-button size="small" icon="delete" title="删除">
                       {{ $t('btn.delete') }}
                     </el-button>
                   </el-dropdown-item>
@@ -149,7 +154,7 @@
         <el-card :body-style="{ padding: '15px 15px 0' }">
           <el-descriptions :column="1" :title="item.name" size="small" border>
             <el-descriptions-item label="任务类型">
-              <dict-tag :options="options.taskTypeOptions" :value="item.taskType" />
+              <dict-tag :options="options.sys_job_type" :value="item.taskType" />
             </el-descriptions-item>
             <el-descriptions-item label="触发器类型" width="90px">
               <dict-tag :options="options.triggerTypeOptions" :value="item.triggerType" />
@@ -187,7 +192,8 @@
         </el-card>
       </el-col>
     </el-row>
-    <pagination v-model:total="total" v-model:page="queryParams.PageNum" v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination v-model:total="total" v-model:page="queryParams.PageNum" v-model:limit="queryParams.pageSize"
+      @pagination="getList" />
 
     <el-dialog :title="title" v-model="open" width="600px" draggable append-to-body>
       <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
@@ -205,10 +211,7 @@
           <el-col :lg="12">
             <el-form-item label="触发器类型" prop="triggerType">
               <el-select v-model="form.triggerType" placeholder="请选择触发器类型" style="width: 100%">
-                <el-option
-                  v-for="item in options.triggerTypeOptions"
-                  :key="item.dictValue"
-                  :label="item.dictLabel"
+                <el-option v-for="item in options.triggerTypeOptions" :key="item.dictValue" :label="item.dictLabel"
                   :value="parseInt(item.dictValue)" />
               </el-select>
             </el-form-item>
@@ -216,10 +219,7 @@
           <el-col :lg="12">
             <el-form-item label="任务分组" maxlength="200" prop="jobGroup">
               <el-select v-model="form.jobGroup" placeholder="请选择任务分组">
-                <el-option
-                  v-for="dict in options.jobGroupOptions"
-                  :key="dict.dictValue"
-                  :label="dict.dictLabel"
+                <el-option v-for="dict in options.jobGroupOptions" :key="dict.dictValue" :label="dict.dictLabel"
                   :value="dict.dictValue"></el-option>
               </el-select>
             </el-form-item>
@@ -284,7 +284,7 @@
             <el-form-item label="间隔(Cron)" prop="cron">
               <el-input v-model="form.cron" placeholder="请输入cron执行表达式">
                 <template #append>
-                  <el-button type="primary" @click="handleShowCron" style="width: 80px">
+                  <el-button type="primary" @click="handleShowCron" style="width: 100px">
                     生成表达式
                     <el-icon><time /></el-icon>
                   </el-button>
@@ -314,7 +314,8 @@
           </el-col>
           <el-col :lg="24">
             <el-form-item v-show="form.triggerType == 0" label="执行间隔(秒)" prop="intervalSecond">
-              <el-input-number v-model="form.intervalSecond" :max="9999999999" step-strictly controls-position="right" :min="1" />
+              <el-input-number v-model="form.intervalSecond" :max="9999999999" step-strictly controls-position="right"
+                :min="1" />
             </el-form-item>
           </el-col>
           <el-col :lg="24">
@@ -397,9 +398,9 @@ const queryParams = reactive({
 const columns = ref([
   // { visible: true, prop: 'name', label: '名称' },
   { visible: true, prop: 'taskType', label: '任务类型' },
-  { visible: true, prop: 'triggerType', label: '触发器类型' },
+  { visible: false, prop: 'triggerType', label: '触发器类型' },
   { visible: true, prop: 'jobGroup', label: '任务分组' },
-  { visible: true, prop: 'assemblyName', label: '程序集名称' },
+  { visible: false, prop: 'assemblyName', label: '程序集名称' },
   { visible: true, prop: 'className', label: '类名' },
   { visible: true, prop: 'lastRunTime', label: '最后运行时间' },
   { visible: false, prop: 'remark', label: '备注' },
@@ -445,11 +446,7 @@ const state = reactive({
       { dictLabel: '普通', dictValue: '0' },
       { dictLabel: '表达式', dictValue: '1' }
     ],
-    taskTypeOptions: [
-      { dictLabel: '程序集', dictValue: '1' },
-      { dictLabel: 'api请求', dictValue: '2', listClass: 'danger' },
-      { dictLabel: 'sql脚本', dictValue: '3', listClass: 'info' }
-    ],
+    sys_job_type: [],
     // 任务状态字典
     isStartOptions: [
       { dictLabel: '运行中', dictValue: '1', listClass: 'success' },
@@ -462,6 +459,17 @@ const state = reactive({
 // 按钮是否可见
 const btnVisible = ref(true)
 const { rules, form, options } = toRefs(state)
+
+
+var dictParams = [
+  "sys_job_type"
+]
+
+proxy.getDicts(dictParams).then((response) => {
+  response.data.forEach((element) => {
+    state.options[element.dictType] = element.list
+  })
+})
 
 /** 查询计划任务列表 */
 function getList() {
@@ -546,7 +554,7 @@ function handleDelete(row) {
         }
       })
     })
-    .catch(function () {})
+    .catch(function () { })
 }
 /* 立即执行一次 */
 function handleRun(row) {

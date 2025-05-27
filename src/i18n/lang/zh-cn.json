@@ -41,7 +41,12 @@
     "userOnlineLog": "用户在线日志",
     "dataDiffLog": "数据差异日志",
     "smsLog": "短信记录",
-    "zujianDemo": "组件示例"
+    "zujianDemo": "组件示例",
+    "qms": "基础数据管理",
+    "qmsEquipment": "检测设备",
+    "qmsInspectionItems": "检验项目",
+    "check": "检验单管理",
+    "checkincomingmaterial": "来料质检单"
   },
   "tagsView": {
     "refresh": "刷新页面",
@@ -92,7 +97,7 @@
     "technicalSelection": "技术选型",
     "frontendTechnology": "前端技术",
     "backendTechnology": "后端技术",
-    "backstageManagement": "后台管理",
+    "backstageManagement": "系统",
     "bottomBar": "底部栏",
     "identity": "身份",
     "content1": "代码完全免费开源，易读易懂、界面简洁美观，给你的项目多一种选择与参考。",

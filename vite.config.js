@@ -56,7 +56,7 @@ export default defineConfig(({ mode, command }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/dev-api/, '')
         },
-        '/msghub': {
+        '/msgHub': {
           target: env.VITE_APP_API_HOST,
           ws: true,
           rewrite: (path) => path.replace(/^\/msgHub/, '')

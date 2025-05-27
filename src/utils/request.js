@@ -103,7 +103,7 @@ service.interceptors.response.use(
       message = '系统接口' + message.substr(message.length - 3) + '异常，请联系管理员'
 
       if (import.meta.env.DEV) {
-        message = 'Oops,后端出错了，你不会连错误日志都不会看吧'
+        message = 'Oops,后端出错了，请查看错误日志'
         duration = 0
       }
     }

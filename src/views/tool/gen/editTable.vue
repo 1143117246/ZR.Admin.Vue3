@@ -8,9 +8,9 @@
         <gen-info-form ref="genInfo" :info="info" :tables="tables" :columns="columns" />
       </el-tab-pane>
       <el-tab-pane label="字段信息" name="cloum">
-        <el-alert type="success"
+        <!-- <el-alert type="success"
           >查看文档：<a target="_blank" href="http://www.izhaorui.cn/doc/backend/code.html">https://www.izhaorui.cn/doc/backend/code.html</a>
-        </el-alert>
+        </el-alert> -->
         <el-table ref="dragTableRef" v-loading="loading" :data="columns" row-key="columnId" min-height="80px" :max-height="tableHeight">
           <el-table-column label="#" type="index" class-name="allowDrag" width="60" fixed />
           <el-table-column label="字段列名" prop="columnName" :show-overflow-tooltip="true" width="90" fixed />

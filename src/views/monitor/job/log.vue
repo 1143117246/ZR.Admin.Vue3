@@ -2,27 +2,24 @@
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
       <el-form-item label="任务名称" prop="jobName">
-        <el-input v-model="queryParams.jobName" placeholder="请输入任务名称" clearable style="width: 240px" @keyup.enter="handleQuery" />
+        <el-input v-model="queryParams.jobName" placeholder="请输入任务名称" clearable style="width: 240px"
+          @keyup.enter="handleQuery" />
       </el-form-item>
       <el-form-item label="任务组名" prop="jobGroup">
         <el-select v-model="queryParams.jobGroup" placeholder="请任务组名" clearable style="width: 240px">
-          <el-option v-for="dict in jobGroupOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+          <el-option v-for="dict in jobGroupOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="执行状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择执行状态" clearable style="width: 240px">
-          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel" :value="dict.dictValue" />
+          <el-option v-for="dict in statusOptions" :key="dict.dictValue" :label="dict.dictLabel"
+            :value="dict.dictValue" />
         </el-select>
       </el-form-item>
       <el-form-item label="执行时间">
-        <el-date-picker
-          v-model="dateRange"
-          value-format="YYYY-MM-DD HH:mm:ss"
-          type="datetimerange"
-          range-separator="-"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :shortcuts="dateOptions"></el-date-picker>
+        <el-date-picker v-model="dateRange" value-format="YYYY-MM-DD HH:mm:ss" type="datetimerange" range-separator="-"
+          start-placeholder="开始日期" end-placeholder="结束日期" :shortcuts="dateOptions"></el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="search" @click="handleQuery">搜索</el-button>
@@ -32,15 +29,16 @@
 
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="delete" :disabled="multiple" @click="handleDelete" v-hasPermi="['PRIV_JOBLOG_DELETE']">删除</el-button>
+        <el-button type="danger" plain icon="delete" :disabled="multiple" @click="handleDelete"
+          v-hasPermi="['PRIV_JOBLOG_DELETE']">删除</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="danger" plain icon="delete" @click="handleClean" :disabled="total <= 0" v-hasPermi="['PRIV_JOBLOG_REMOVE']"
-          >清空</el-button
-        >
+        <el-button type="danger" plain icon="delete" @click="handleClean" :disabled="total <= 0"
+          v-hasPermi="['PRIV_JOBLOG_REMOVE']">清空</el-button>
       </el-col>
       <el-col :span="1.5">
-        <el-button type="warning" plain icon="download" @click="handleExport" v-hasPermi="['PRIV_JOBLOG_EXPORT']">导出</el-button>
+        <el-button type="warning" plain icon="download" @click="handleExport"
+          v-hasPermi="['PRIV_JOBLOG_EXPORT']">导出</el-button>
       </el-col>
       <right-toolbar :showSearch="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
@@ -49,7 +47,8 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="日志编号" width="80" align="center" prop="jobLogId" />
       <el-table-column label="任务名称" align="center" prop="jobName" :show-overflow-tooltip="true" />
-      <el-table-column label="任务组名" align="center" prop="jobGroup" :formatter="jobGroupFormat" :show-overflow-tooltip="true" />
+      <el-table-column label="任务组名" align="center" prop="jobGroup" :formatter="jobGroupFormat"
+        :show-overflow-tooltip="true" />
       <el-table-column label="调用目标字符串" align="center" prop="invokeTarget" :show-overflow-tooltip="true" />
       <el-table-column label="日志信息" align="center" prop="jobMessage" :show-overflow-tooltip="true" />
       <el-table-column label="执行状态" align="center" prop="status">
@@ -59,7 +58,8 @@
       </el-table-column>
       <el-table-column label="作业用时" align="center" prop="elapsed">
         <template #default="scope">
-          <span :style="scope.row.elapsed < 1000 ? 'color:green' : scope.row.elapsed < 3000 ? 'color:orange' : 'color:red'">
+          <span
+            :style="scope.row.elapsed < 1000 ? 'color:green' : scope.row.elapsed < 3000 ? 'color:orange' : 'color:red'">
             {{ Math.floor(scope.row.elapsed) / 1000 }} s
           </span>
         </template>
@@ -76,7 +76,8 @@
       </el-table-column>
     </el-table>
 
-    <pagination :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize" @pagination="getList" />
+    <pagination :total="total" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+      @pagination="getList" />
 
     <!-- 调度日志详细 -->
     <el-dialog title="日志详细" v-model="open" width="700px" append-to-body>
